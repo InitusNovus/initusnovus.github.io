@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>InitusNovus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InitusNovus – Embedded & Control Systems Engineer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #0d1117;
+  --fg: #c9d1d9;
+  --accent: #58a6ff;
+  --card-bg: #161b22;
+}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Fira Code', monospace;color:var(--fg);} 
+body {background:var(--bg); line-height:1.6;}
+header {position:fixed;top:0;left:0;width:100%;background:rgba(13,17,23,0.8);backdrop-filter:blur(4px);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; z-index:100;}
+header h1 {font-size:1.2rem;letter-spacing:0.05em;}
+nav a {margin-left:1.5rem;text-decoration:none;color:var(--fg);transition:color 0.2s;}
+nav a:hover {color:var(--accent);} 
+section {padding:6rem 2rem 4rem;max-width:900px;margin:0 auto;}
+.hero {display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;}
+.hero h2 {font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;color:var(--accent);} 
+.hero p {font-size:1rem;max-width:600px;}
+.btn {display:inline-block;margin-top:2rem;padding:0.75rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent);text-decoration:none;transition:background 0.2s;}
+.btn:hover {background:var(--accent);color:var(--bg);} 
+.card-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+.card {background:var(--card-bg);padding:1.5rem;border-radius:8px;border:1px solid #30363d;transition:transform 0.2s;}
+.card:hover {transform:translateY(-4px);} 
+footer {text-align:center;padding:3rem 2rem;font-size:0.9rem;}
+.toggle {cursor:pointer;user-select:none;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>InitusNovus</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <span class="toggle" id="modeToggle" title="Toggle light/dark">☀︎</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Hello, I'm <span style="color:var(--fg);">InitusNovus</span></h2>
+      <p>Firmware & control engineer crafting robust embedded systems, electric drivetrains, and open-source tooling. Exploring the intersection of hardware and functional programming.</p>
+      <a class="btn" href="https://github.com/InitusNovus" target="_blank">Visit my GitHub</a>
+    </section>
+
+    <section id="about">
+      <h3>About</h3>
+      <p>I'm passionate about building reliable embedded platforms—from ARM-based motor controllers to telematics devices—and sharing that knowledge through well-documented open-source projects. My current interests include high-performance STM32 firmware, model predictive control, and domain-specific languages for real-time systems.</p>
+    </section>
+
+    <section id="projects">
+      <h3>Featured Projects</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h4>EVn Bootloader</h4>
+          <p>Chunk-decrypted secure bootloader for STM32F412 with UART & LTE updates.</p>
+          <a class="btn" href="https://github.com/InitusNovus/EVn-Bootloader" target="_blank">Repo</a>
+        </div>
+        <div class="card">
+          <h4>Traction Inverter H7</h4>
+          <p>20 kW SiC inverter firmware leveraging H743 FOC at 20 kHz.</p>
+          <a class="btn" href="https://github.com/InitusNovus/Traction-Inverter" target="_blank">Repo</a>
+        </div>
+        <div class="card">
+          <h4>CAN-Telematics Toolkit</h4>
+          <p>End-to-end pipeline for vehicle data collection, processing, and visualization.</p>
+          <a class="btn" href="https://github.com/InitusNovus/CAN-Telematics" target="_blank">Repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contact</h3>
+      <p>Want to collaborate or just say hi? Reach me via&nbsp;
+        <a href="mailto:initusnovus@gmail.com">email</a>, connect on&nbsp;
+        <a href="https://linkedin.com/in/initusnovus" target="_blank">LinkedIn</a>, or open an issue on GitHub.</p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> InitusNovus. Built with ♥ and static HTML.
+  </footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const toggle=document.getElementById('modeToggle');
+toggle.addEventListener('click',()=>{document.body.classList.toggle('light');
+  if(document.body.classList.contains('light')){
+    document.documentElement.style.setProperty('--bg','#ffffff');
+    document.documentElement.style.setProperty('--fg','#0d1117');
+    document.documentElement.style.setProperty('--card-bg','#f6f8fa');
+    document.documentElement.style.setProperty('--accent','#0d6efd');
+    toggle.textContent='☾';
+  }else{
+    document.documentElement.style.setProperty('--bg','#0d1117');
+    document.documentElement.style.setProperty('--fg','#c9d1d9');
+    document.documentElement.style.setProperty('--card-bg','#161b22');
+    document.documentElement.style.setProperty('--accent','#58a6ff');
+    toggle.textContent='☀︎';
+  }
+});
+</script>
+</body>
+</html>
