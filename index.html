@@ -1,113 +1,240 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>InitusNovus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="InitusNovus – Embedded & Control Systems Engineer">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="description" content="InitusNovus — embedded systems, vehicle networks, and engineering tools.">
+  <title>InitusNovus</title>
   <style>
-:root {
-  --bg: #0d1117;
-  --fg: #c9d1d9;
-  --accent: #58a6ff;
-  --card-bg: #161b22;
-}
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Fira Code', monospace;color:var(--fg);} 
-body {background:var(--bg); line-height:1.6;}
-header {position:fixed;top:0;left:0;width:100%;background:rgba(13,17,23,0.8);backdrop-filter:blur(4px);padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center; z-index:100;}
-header h1 {font-size:1.2rem;letter-spacing:0.05em;}
-nav a {margin-left:1.5rem;text-decoration:none;color:var(--fg);transition:color 0.2s;}
-nav a:hover {color:var(--accent);} 
-section {padding:6rem 2rem 4rem;max-width:900px;margin:0 auto;}
-.hero {display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;}
-.hero h2 {font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;color:var(--accent);} 
-.hero p {font-size:1rem;max-width:600px;}
-.btn {display:inline-block;margin-top:2rem;padding:0.75rem 1.5rem;border:1px solid var(--accent);border-radius:6px;color:var(--accent);text-decoration:none;transition:background 0.2s;}
-.btn:hover {background:var(--accent);color:var(--bg);} 
-.card-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
-.card {background:var(--card-bg);padding:1.5rem;border-radius:8px;border:1px solid #30363d;transition:transform 0.2s;}
-.card:hover {transform:translateY(-4px);} 
-footer {text-align:center;padding:3rem 2rem;font-size:0.9rem;}
-.toggle {cursor:pointer;user-select:none;}
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --panel2: #11161d;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --line: #30363d;
+      --accent: #58a6ff;
+      --accent2: #79c0ff;
+      --max: 980px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(48,54,61,.75);
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(10px);
+    }
+    header .wrap {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { font-weight: 700; text-decoration: none; }
+    nav { display: flex; gap: 18px; font-size: .9rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--fg); }
+    main { padding-bottom: 80px; }
+    .hero {
+      padding: 108px 0 72px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow { color: var(--accent); font-size: .9rem; margin-bottom: 12px; }
+    h1 {
+      max-width: 800px;
+      margin: 0 0 20px;
+      font-size: clamp(2.4rem, 7vw, 5.3rem);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+    .hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: .9rem;
+      background: var(--panel);
+    }
+    .button:hover { border-color: var(--accent); color: var(--accent2); }
+    .button.primary { border-color: rgba(88,166,255,.5); color: var(--accent2); }
+    section { padding: 66px 0 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+    h2 { margin: 0; font-size: 1.15rem; letter-spacing: -.02em; }
+    .section-note { color: var(--muted); font-size: .82rem; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      min-height: 215px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      display: flex;
+      flex-direction: column;
+    }
+    .card .meta { color: var(--accent); font-size: .77rem; margin-bottom: 12px; }
+    .card h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .card p { margin: 0 0 20px; color: var(--muted); font-size: .9rem; }
+    .card .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 13px; }
+    .card .links a { color: var(--accent2); font-size: .85rem; text-decoration: none; }
+    .card .links a:hover { text-decoration: underline; }
+    .plain {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 22px;
+      color: var(--muted);
+      background: var(--panel2);
+    }
+    .plain strong { color: var(--fg); }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+    @media (max-width: 700px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      nav a:not(:last-child) { display: none; }
+      .hero { padding-top: 76px; }
+      .projects { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 6px; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>InitusNovus</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <span class="toggle" id="modeToggle" title="Toggle light/dark">☀︎</span>
-    </nav>
+    <div class="wrap">
+      <a class="brand" href="#top">InitusNovus</a>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/InitusNovus" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h2>Hello, I'm <span style="color:var(--fg);">InitusNovus</span></h2>
-      <p>Firmware & control engineer crafting robust embedded systems, electric drivetrains, and open-source tooling. Exploring the intersection of hardware and functional programming.</p>
-      <a class="btn" href="https://github.com/InitusNovus" target="_blank">Visit my GitHub</a>
-    </section>
-
-    <section id="about">
-      <h3>About</h3>
-      <p>I'm passionate about building reliable embedded platforms—from ARM-based motor controllers to telematics devices—and sharing that knowledge through well-documented open-source projects. My current interests include high-performance STM32 firmware, model predictive control, and domain-specific languages for real-time systems.</p>
-    </section>
+  <main id="top">
+    <div class="hero">
+      <div class="wrap">
+        <div class="eyebrow">embedded / vehicle networks / engineering tools</div>
+        <h1>I build hardware-facing software and tools.</h1>
+        <p>
+          Mostly embedded systems, CAN/CAN-FD, firmware tooling, validation, and small utilities that are useful enough to keep around.
+          This page is intentionally just the things that actually exist.
+        </p>
+        <div class="hero-links">
+          <a class="button primary" href="#projects">Projects</a>
+          <a class="button" href="https://github.com/InitusNovus" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+        </div>
+      </div>
+    </div>
 
     <section id="projects">
-      <h3>Featured Projects</h3>
-      <div class="card-grid">
-        <div class="card">
-          <h4>EVn Bootloader</h4>
-          <p>Chunk-decrypted secure bootloader for STM32F412 with UART & LTE updates.</p>
-          <a class="btn" href="https://github.com/InitusNovus/EVn-Bootloader" target="_blank">Repo</a>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected projects</h2>
+          <div class="section-note">A small, current subset — not a generated résumé.</div>
         </div>
-        <div class="card">
-          <h4>Traction Inverter H7</h4>
-          <p>20 kW SiC inverter firmware leveraging H743 FOC at 20 kHz.</p>
-          <a class="btn" href="https://github.com/InitusNovus/Traction-Inverter" target="_blank">Repo</a>
-        </div>
-        <div class="card">
-          <h4>CAN-Telematics Toolkit</h4>
-          <p>End-to-end pipeline for vehicle data collection, processing, and visualization.</p>
-          <a class="btn" href="https://github.com/InitusNovus/CAN-Telematics" target="_blank">Repo</a>
+
+        <div class="projects">
+          <article class="card">
+            <div class="meta">WEB TOOL · REACT</div>
+            <h3>LED-TR Analyzer</h3>
+            <p>
+              LED series-resistor and digital-NPN driver calculator with E-series selection, tolerance corners,
+              forced-beta checks, and resistor power derating.
+            </p>
+            <div class="links">
+              <a href="https://initusnovus.github.io/led-tr-analyzer/" target="_blank" rel="noreferrer">Live demo ↗</a>
+              <a href="https://github.com/InitusNovus/led-tr-analyzer" target="_blank" rel="noreferrer">Source ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">CAN TOOLING · F# / C99</div>
+            <h3>Signal-CANdy</h3>
+            <p>
+              DBC-to-C code generator. Parses CAN DBC files and emits portable C99 parser modules for firmware integration.
+            </p>
+            <div class="links">
+              <a href="https://github.com/InitusNovus/Signal-CANdy" target="_blank" rel="noreferrer">Repository ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">AGENT SKILL · CAN / CAN-FD</div>
+            <h3>PCAN Operations Skill</h3>
+            <p>
+              Reusable operating procedures and examples for PEAK PCAN interfaces through PCANBasic or python-can,
+              including timing, cleanup, status handling, and bench-safe operation.
+            </p>
+            <div class="links">
+              <a href="https://github.com/InitusNovus/pcan-operations-skill" target="_blank" rel="noreferrer">Repository ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">VALIDATION · CAN / CAN-FD</div>
+            <h3>PCAN Validation Skill</h3>
+            <p>
+              Two-channel functional, timing, stress, recovery, and soak-test suite for PCAN and PCANBasic-compatible interfaces.
+            </p>
+            <div class="links">
+              <a href="https://github.com/InitusNovus/pcan-validation-skill" target="_blank" rel="noreferrer">Repository ↗</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="contact">
-      <h3>Contact</h3>
-      <p>Want to collaborate or just say hi? Reach me via&nbsp;
-        <a href="mailto:initusnovus@gmail.com">email</a>, connect on&nbsp;
-        <a href="https://linkedin.com/in/initusnovus" target="_blank">LinkedIn</a>, or open an issue on GitHub.</p>
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>About this page</h2>
+        </div>
+        <div class="plain">
+          <strong>No résumé filler.</strong> Projects appear here when there is a real repository or a usable artifact to point at.
+          For everything else, the GitHub profile is the index.
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    © <span id="year"></span> InitusNovus. Built with ♥ and static HTML.
+    <div class="wrap">© <span id="year"></span> InitusNovus</div>
   </footer>
-
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const toggle=document.getElementById('modeToggle');
-toggle.addEventListener('click',()=>{document.body.classList.toggle('light');
-  if(document.body.classList.contains('light')){
-    document.documentElement.style.setProperty('--bg','#ffffff');
-    document.documentElement.style.setProperty('--fg','#0d1117');
-    document.documentElement.style.setProperty('--card-bg','#f6f8fa');
-    document.documentElement.style.setProperty('--accent','#0d6efd');
-    toggle.textContent='☾';
-  }else{
-    document.documentElement.style.setProperty('--bg','#0d1117');
-    document.documentElement.style.setProperty('--fg','#c9d1d9');
-    document.documentElement.style.setProperty('--card-bg','#161b22');
-    document.documentElement.style.setProperty('--accent','#58a6ff');
-    toggle.textContent='☀︎';
-  }
-});
-</script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
